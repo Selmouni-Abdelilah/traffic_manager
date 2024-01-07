@@ -3,6 +3,9 @@ pipeline {
     tools {
         terraform "terraform"
     }
+    environment {
+        ARM_ACCESS_KEY = credentials('ARM_ACCESS_KEY')
+    }
     stages {
         stage('Checkout') {
             steps {
