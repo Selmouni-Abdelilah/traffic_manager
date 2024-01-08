@@ -2,7 +2,7 @@ pipeline {
     parameters {
         choice(
             name: 'ENVIRONMENT',
-            choices: ['Development', 'PreProd', 'Prod'],
+            choices: ['development', 'preprod', 'prod'],
             description: 'Select the target environment for deployment'
         )
     }
