@@ -5,6 +5,11 @@ pipeline {
             choices: ['development', 'preprod', 'prod'],
             description: 'Select the target environment for deployment'
         )
+        choice(
+            name: 'ACTION',
+            choices: ['apply', 'destroy'],
+            description: 'Select the action you want to perform'
+        )
     }
     agent any
     tools {
@@ -33,12 +38,10 @@ pipeline {
                 script {
                     dir('Terraform') {
                     sh 'terraform init -upgrade'
-                    sh "terraform apply --auto-approve -var 'environment=${params.ENVIRONMENT}'"
+                    sh "terraform ${params.ACTION} --auto-approve -var 'environment=${params.ENVIRONMENT}'"
                     }
                 }
             }    
         }   
-
     }
-
 }
