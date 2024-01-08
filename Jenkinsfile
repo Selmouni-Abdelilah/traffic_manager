@@ -1,11 +1,4 @@
 pipeline {
-    input {
-            message 'Please Select the target environment for deployment'
-            ok 'Submit'
-            parameters {
-                choice(name: 'ENVIRONMENT',choices: ['Development', 'PreProd', 'Prod'],description: 'Select the target environment for deployment')
-            }
-        }
     agent any
     tools {
         terraform "terraform"
@@ -29,6 +22,13 @@ pipeline {
             }
         }
         stage('Terraform ') {
+            input {
+                message 'Please Select the target environment for deployment'
+                ok 'Submit'
+                parameters {
+                    choice(name: 'ENVIRONMENT',choices: ['Development', 'PreProd', 'Prod'],description: 'Select the target environment for deployment')
+                }
+            }
             steps {
                 script {
                     dir('Terraform') {
